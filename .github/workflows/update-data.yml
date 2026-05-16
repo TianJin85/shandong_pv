@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   crawler:
-    runs-on: [self-hosted, Windows, X64]
+    runs-on: [ self-hosted, Windows, X64 ]
 
     steps:
       - name: 拉取仓库代码
@@ -28,19 +28,20 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: 运行采集脚本
+      - name: 运行百度检索爬虫
         shell: cmd
         run: |
           python crawler.py ^
-            --search-mode rss ^
             --no-file-log ^
             --no-detail-logs ^
-            --limit-queries 0 ^
-            --max-pages-per-query 2 ^
-            --query-sleep-min 5 ^
-            --query-sleep-max 10 ^
-            --page-sleep-min 2 ^
-            --page-sleep-max 5
+            --limit-queries 3 ^
+            --max-pages-per-query 1 ^
+            --query-sleep-min 30 ^
+            --query-sleep-max 60 ^
+            --page-sleep-min 5 ^
+            --page-sleep-max 10 ^
+            --restart-browser-every 3 ^
+            --restart-sleep 60
 
       - name: 提交采集结果
         shell: cmd
