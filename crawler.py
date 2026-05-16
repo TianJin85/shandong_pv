@@ -736,11 +736,7 @@ def build_drission_page(args: argparse.Namespace) -> ChromiumPage:
         logging.warning("已启用 --headless。百度更容易触发验证，GitHub Actions 中建议用 xvfb-run 且不要加 --headless。")
 
     # 稳定性参数
-    add_chrome_arg(co, "--no-sandbox")
-    add_chrome_arg(co, "--disable-dev-shm-usage")
-    add_chrome_arg(co, "--disable-gpu")
     add_chrome_arg(co, "--disable-blink-features=AutomationControlled")
-    add_chrome_arg(co, "--disable-infobars")
     add_chrome_arg(co, "--window-size=1366,900")
     add_chrome_arg(co, "--lang=zh-CN")
     add_chrome_arg(co, "--remote-debugging-port=0")
@@ -754,7 +750,6 @@ def build_drission_page(args: argparse.Namespace) -> ChromiumPage:
     set_user_data_path(co, user_data_dir)
     new_func_name = "YunXi"
     Scroller.YunXi = new_func_name
-
     try:
         page = ChromiumPage(addr_or_opts=co)
     except TypeError:
